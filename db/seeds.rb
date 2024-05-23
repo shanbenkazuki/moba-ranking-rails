@@ -7,3 +7,13 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require 'csv'
+
+CSV.foreach(Rails.root.join('db/csv/hero.csv'), headers: true) do |row|
+  Hero.create!(
+    name_en: row['name_en'],
+    name_jp: row['name_jp'],
+    role: row['role'],
+    tier_img_url: row['tier_img_url']
+  )
+end
