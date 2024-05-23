@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Heroes#index</h1>
+  <p>Find me in app/views/heroes/index.html.erb</p>
+  <button type="button" class="btn btn-primary">Test</button>
+  <% @tier_img_urls.each do |url| %>
+    <%= image_tag(url, alt: 'Hero Tier Image', width: '100', height: '100') %>
+  <% end %>
+</div>
