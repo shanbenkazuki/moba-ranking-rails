@@ -1,4 +1,6 @@
 class Hero < ApplicationRecord
+    has_many :herorates
+
     validates :name_en, presence: true, uniqueness: true
     validates :name_jp, presence: true
     validates :role, presence: true, inclusion: { in: ['Fighter', 'Mage', 'Tank', 'Assassin', 'Marksman', 'Support'] }

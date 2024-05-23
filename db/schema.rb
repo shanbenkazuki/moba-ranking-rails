@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_23_090813) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_23_114521) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,4 +25,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_090813) do
     t.check_constraint "role::text = ANY (ARRAY['Fighter'::character varying, 'Mage'::character varying, 'Tank'::character varying, 'Assassin'::character varying, 'Marksman'::character varying, 'Support'::character varying]::text[])", name: "role_check"
   end
 
+  create_table "herorates", force: :cascade do |t|
+    t.bigint "hero_id", null: false
+    t.float "win_rate"
+    t.float "pick_rate"
+    t.float "ban_rate"
+    t.date "reference_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hero_id", "reference_date"], name: "index_herorates_on_hero_id_and_reference_date", unique: true
+    t.index ["hero_id"], name: "index_herorates_on_hero_id"
+  end
+
+  add_foreign_key "herorates", "heroes"
 end
