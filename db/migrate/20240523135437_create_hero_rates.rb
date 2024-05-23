@@ -1,6 +1,6 @@
-class CreateHerorates < ActiveRecord::Migration[7.1]
+class CreateHeroRates < ActiveRecord::Migration[7.1]
   def change
-    create_table :herorates do |t|
+    create_table :hero_rates do |t|
       t.references :hero, null: false, foreign_key: true
       t.float :win_rate
       t.float :pick_rate
@@ -10,6 +10,6 @@ class CreateHerorates < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :herorates, [:hero_id, :reference_date], unique: true
+    add_index :hero_rates, [:hero_id, :reference_date], unique: true
   end
 end
