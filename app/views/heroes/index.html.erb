@@ -10,69 +10,10 @@
 </div>
 
 <table class="table">
-  <tr>
-    <td style="background-color: #ff9900;">
-      <h2 class="text-white">S+</h2>
-    </td>
-    <td style="background-color: #ffeecc;">
-      <% @heroes.select { |hero| hero.tier == 'S+' }.each do |hero| %>
-        <img src="<%= hero.tier_img_url %>" alt="<%= hero.name_en %>" width="80">
-      <% end %>
-    </td>
-  </tr>
-
-  <tr>
-    <td style="background-color: #ff6666;">
-      <h2 class="text-white">S</h2>
-    </td>
-    <td style="background-color: #ffeeee;">
-      <% @heroes.select { |hero| hero.tier == 'S' }.each do |hero| %>
-        <img src="<%= hero.tier_img_url %>" alt="<%= hero.name_en %>" width="80">
-      <% end %>
-    </td>
-  </tr>
-
-  <tr>
-    <td style="background-color: #ff00cc;">
-      <h2 class="text-white">A+</h2>
-    </td>
-    <td style="background-color: #ffe7fa;">
-      <% @heroes.select { |hero| hero.tier == 'A+' }.each do |hero| %>
-        <img src="<%= hero.tier_img_url %>" alt="<%= hero.name_en %>" width="80">
-      <% end %>
-    </td>
-  </tr>
-
-  <tr>
-    <td style="background-color: #6666ff;">
-      <h2 class="text-white">A</h2>
-    </td>
-    <td style="background-color: #eeeeff;">
-      <% @heroes.select { |hero| hero.tier == 'A' }.each do |hero| %>
-        <img src="<%= hero.tier_img_url %>" alt="<%= hero.name_en %>" width="80">
-      <% end %>
-    </td>
-  </tr>
-
-  <tr>
-    <td style="background-color: #53abff;">
-      <h2 class="text-white">B</h2>
-    </td>
-    <td style="background-color: #f0f8ff;">
-      <% @heroes.select { |hero| hero.tier == 'B' }.each do |hero| %>
-        <img src="<%= hero.tier_img_url %>" alt="<%= hero.name_en %>" width="80">
-      <% end %>
-    </td>
-  </tr>
-
-  <tr>
-    <td style="background-color: #0dbc0d;">
-      <h2 class="text-white">C</h2>
-    </td>
-    <td style="background-color: #eeffee;">
-      <% @heroes.select { |hero| hero.tier == 'C' }.each do |hero| %>
-        <img src="<%= hero.tier_img_url %>" alt="<%= hero.name_en %>" width="80">
-      <% end %>
-    </td>
-  </tr>
+  <%= render partial: 'tier', locals: { tier: 'S+', color: '#ff9900', bg_color: '#ffeecc' } %>
+  <%= render partial: 'tier', locals: { tier: 'S', color: '#ff6666', bg_color: '#ffeeee' } %>
+  <%= render partial: 'tier', locals: { tier: 'A+', color: '#ff00cc', bg_color: '#ffe7fa' } %>  
+  <%= render partial: 'tier', locals: { tier: 'A', color: '#6666ff', bg_color: '#eeeeff' } %>
+  <%= render partial: 'tier', locals: { tier: 'B', color: '#53abff', bg_color: '#f0f8ff' } %>
+  <%= render partial: 'tier', locals: { tier: 'C', color: '#0dbc0d', bg_color: '#eeffee' } %>
 </table>

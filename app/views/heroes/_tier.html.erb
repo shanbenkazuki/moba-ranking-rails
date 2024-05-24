@@ -1,0 +1,10 @@
+<tr>
+  <td class="tier-label" style="background-color: <%= color %>;">
+    <h2 style="color: white;"><%= tier %></h2>
+  </td>
+  <td class="tier-heroes" style="background-color: <%= bg_color %>;">
+    <% @heroes.select { |hero| hero.tier == tier }.each do |hero| %>
+      <%= image_tag hero.tier_img_url, alt: hero.name_en, style: 'width: 80px;' %>
+    <% end %>
+  </td>
+</tr>
