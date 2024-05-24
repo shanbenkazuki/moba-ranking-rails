@@ -18,8 +18,34 @@ require 'csv'
 #   )
 # end
 
-csv_file_path = 'db/csv/hero_rates/hero_stats_2024-05-19.csv'
-reference_date = Date.parse('2024-05-19')
+# csv_file_path = 'db/csv/hero_rates/hero_stats_2024-05-19.csv'
+# reference_date = Date.parse('2024-05-19')
+
+# CSV.foreach(csv_file_path, headers: true) do |row|
+#   HeroRate.create!(
+#     hero_id: Hero.find_by(name_en: row['hero']).id,
+#     win_rate: row['win_rate'],
+#     pick_rate: row['pick_rate'],
+#     ban_rate: row['ban_rate'],
+#     reference_date: reference_date
+#   )
+# end
+
+csv_file_path = 'db/csv/hero_rates/hero_stats_2024-05-14.csv'
+reference_date = Date.parse('2024-05-14')
+
+CSV.foreach(csv_file_path, headers: true) do |row|
+  HeroRate.create!(
+    hero_id: Hero.find_by(name_en: row['hero']).id,
+    win_rate: row['win_rate'],
+    pick_rate: row['pick_rate'],
+    ban_rate: row['ban_rate'],
+    reference_date: reference_date
+  )
+end
+
+csv_file_path = 'db/csv/hero_rates/hero_stats_2024-05-08.csv'
+reference_date = Date.parse('2024-05-08')
 
 CSV.foreach(csv_file_path, headers: true) do |row|
   HeroRate.create!(
