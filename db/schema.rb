@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_23_135437) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_24_120417) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,8 +33,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_135437) do
     t.string "tier_img_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tier"
     t.index ["name_en"], name: "index_heroes_on_name_en", unique: true
     t.check_constraint "role::text = ANY (ARRAY['Fighter'::character varying, 'Mage'::character varying, 'Tank'::character varying, 'Assassin'::character varying, 'Marksman'::character varying, 'Support'::character varying]::text[])", name: "role_check"
+    t.check_constraint "tier::text = ANY (ARRAY['S+'::character varying, 'S'::character varying, 'A+'::character varying, 'A'::character varying, 'B'::character varying, 'C'::character varying]::text[])", name: "check_tier_values"
   end
 
   add_foreign_key "hero_rates", "heroes"
