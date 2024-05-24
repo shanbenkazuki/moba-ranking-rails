@@ -1,7 +1,6 @@
 class HeroesController < ApplicationController
   def index
-    # 全てのヒーローのtier_img_urlを取得
-    @tier_img_urls = Hero.pluck(:tier_img_url)
-    render 'index'
+    @heroes = Hero.select(:tier_img_url, :tier, :name_en).order(:tier)
+    @latest_date = HeroRate.maximum(:reference_date)
   end
 end

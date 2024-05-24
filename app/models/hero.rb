@@ -1,5 +1,5 @@
 class Hero < ApplicationRecord
-    has_many :herorates
+    has_many :hero_rates, dependent: :destroy
 
     validates :name_en, presence: true, uniqueness: true
     validates :name_jp, presence: true
