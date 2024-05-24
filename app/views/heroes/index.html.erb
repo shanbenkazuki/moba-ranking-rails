@@ -1,8 +1,19 @@
-<div class="container">
-  <h1>Heroes#index</h1>
-  <p>Find me in app/views/heroes/index.html.erb</p>
-  <button type="button" class="btn btn-primary">Test</button>
-  <% @tier_img_urls.each do |url| %>
-    <%= image_tag(url, alt: 'Hero Tier Image', width: '100', height: '100') %>
-  <% end %>
+<div class="row">
+  <div class="col">
+    <h1 class="text-center mb-4">ヒーローTier</h1>
+  </div>
 </div>
+<div class="row">
+  <div class="col">
+    <p class="lead text-center">更新日: <span class="badge bg-primary"><%= @latest_date %></span></p>
+  </div>
+</div>
+
+<table class="table">
+  <%= render partial: 'tier', locals: { tier: 'S+', color: '#ff9900', bg_color: '#ffeecc' } %>
+  <%= render partial: 'tier', locals: { tier: 'S', color: '#ff6666', bg_color: '#ffeeee' } %>
+  <%= render partial: 'tier', locals: { tier: 'A+', color: '#ff00cc', bg_color: '#ffe7fa' } %>  
+  <%= render partial: 'tier', locals: { tier: 'A', color: '#6666ff', bg_color: '#eeeeff' } %>
+  <%= render partial: 'tier', locals: { tier: 'B', color: '#53abff', bg_color: '#f0f8ff' } %>
+  <%= render partial: 'tier', locals: { tier: 'C', color: '#0dbc0d', bg_color: '#eeffee' } %>
+</table>
