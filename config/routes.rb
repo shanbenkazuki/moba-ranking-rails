@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'heroes/index'
   resources :heroes, only: [:index]
+  resources :pokemons, only: [:index]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
