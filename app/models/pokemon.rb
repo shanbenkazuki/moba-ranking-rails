@@ -1,2 +1,10 @@
 class Pokemon < ApplicationRecord
-end
+    has_many :pokemon_rates, dependent: :destroy
+    VALID_STYLES = ['All-Rounder', 'Supporter', 'Attacker', 'Defender', 'Speedster'].freeze
+  
+    validates :name_en, presence: true, uniqueness: true
+    validates :name_jp, presence: true
+    validates :style, presence: true, inclusion: { in: VALID_STYLES }
+    validates :tier_img_url, presence: true
+  end
+  
