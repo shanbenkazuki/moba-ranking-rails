@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_24_120417) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_25_065258) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_120417) do
     t.index ["name_en"], name: "index_heroes_on_name_en", unique: true
     t.check_constraint "role::text = ANY (ARRAY['Fighter'::character varying, 'Mage'::character varying, 'Tank'::character varying, 'Assassin'::character varying, 'Marksman'::character varying, 'Support'::character varying]::text[])", name: "role_check"
     t.check_constraint "tier::text = ANY (ARRAY['S+'::character varying, 'S'::character varying, 'A+'::character varying, 'A'::character varying, 'B'::character varying, 'C'::character varying]::text[])", name: "check_tier_values"
+  end
+
+  create_table "pokemons", force: :cascade do |t|
+    t.string "name_en", null: false
+    t.string "name_jp", null: false
+    t.string "style", null: false
+    t.string "tier_img_url", null: false
+    t.string "tier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name_en"], name: "index_pokemons_on_name_en", unique: true
+    t.check_constraint "style::text = ANY (ARRAY['All-Rounder'::character varying, 'Supporter'::character varying, 'Attacker'::character varying, 'Defender'::character varying, 'Speedster'::character varying]::text[])", name: "valid_style"
   end
 
   add_foreign_key "hero_rates", "heroes"
