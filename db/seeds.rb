@@ -57,14 +57,14 @@ require 'csv'
 #   )
 # end
 
-# CSV.foreach(Rails.root.join('db/csv/pokemons.csv'), headers: true) do |row|
-#   Pokemon.create!(
-#     name_en: row['name_en'],
-#     name_jp: row['name_jp'],
-#     style: row['style'],
-#     tier_img_url: row['tier_img_url']
-#   )
-# end
+CSV.foreach(Rails.root.join('db/csv/pokemons.csv'), headers: true) do |row|
+  Pokemon.create!(
+    name_en: row['name_en'],
+    name_jp: row['name_jp'],
+    style: row['style'],
+    tier_img_url: row['tier_img_url']
+  )
+end
 
 csv_file_path = 'db/csv/pokemon_rates/pokemon_stats_2024-05-14_150906.csv'
 reference_date = Date.parse('2024-05-14')
