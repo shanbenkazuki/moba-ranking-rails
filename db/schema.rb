@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_054554) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_060403) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_054554) do
     t.datetime "updated_at", null: false
     t.index ["hero_id", "reference_date"], name: "index_hero_rates_on_hero_id_and_reference_date", unique: true
     t.index ["hero_id"], name: "index_hero_rates_on_hero_id"
+  end
+
+  create_table "hero_tiers", force: :cascade do |t|
+    t.bigint "hero_id", null: false
+    t.string "tier"
+    t.date "rates_fetched_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hero_id", "rates_fetched_date"], name: "index_hero_tiers_on_hero_id_and_rates_fetched_date", unique: true
+    t.index ["hero_id"], name: "index_hero_tiers_on_hero_id"
+    t.check_constraint "tier::text = ANY (ARRAY['S+'::character varying, 'S'::character varying, 'A+'::character varying, 'A'::character varying, 'B'::character varying, 'C'::character varying]::text[])", name: "check_tier_values"
   end
 
   create_table "heroes", force: :cascade do |t|
@@ -62,5 +73,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_054554) do
   end
 
   add_foreign_key "hero_rates", "heroes"
+  add_foreign_key "hero_tiers", "heroes"
   add_foreign_key "pokemon_rates", "pokemons"
 end
