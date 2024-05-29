@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_060403) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_094902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,12 +60,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_060403) do
     t.index ["pokemon_id"], name: "index_pokemon_rates_on_pokemon_id"
   end
 
+  create_table "pokemon_tiers", force: :cascade do |t|
+    t.bigint "pokemon_id", null: false
+    t.string "tier"
+    t.date "rates_fetched_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pokemon_id"], name: "index_pokemon_tiers_on_pokemon_id"
+    t.check_constraint "tier::text = ANY (ARRAY['S+'::character varying, 'S'::character varying, 'A+'::character varying, 'A'::character varying, 'B'::character varying, 'C'::character varying, 'EX'::character varying]::text[])", name: "check_tier_values"
+  end
+
   create_table "pokemons", force: :cascade do |t|
     t.string "name_en", null: false
     t.string "name_jp", null: false
     t.string "style", null: false
     t.string "tier_img_url", null: false
-    t.string "tier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name_en"], name: "index_pokemons_on_name_en", unique: true
@@ -75,4 +84,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_060403) do
   add_foreign_key "hero_rates", "heroes"
   add_foreign_key "hero_tiers", "heroes"
   add_foreign_key "pokemon_rates", "pokemons"
+  add_foreign_key "pokemon_tiers", "pokemons"
 end
