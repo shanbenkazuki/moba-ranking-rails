@@ -17,8 +17,14 @@ namespace :pokemon do
       pokemon = pokemon_rate.pokemon
 
       if pokemon_rate.win_rate.nil? && pokemon_rate.pick_rate.nil? && pokemon_rate.ban_rate.nil?
-        # win_rate, pick_rate, ban_rateのすべてがnilの場合はtierをNULLにする
-        tier = nil
+        # win_rate, pick_rate, ban_rateのすべてがnilの場合
+        if pokemon.is_EX
+          # pokemonsテーブルのisEXがtrueならtierにEXを設定
+          tier = 'EX'
+        else
+          # それ以外の場合はtierをNULLにする
+          tier = nil
+        end
       else
         # 各指標のz-scoreを計算
         win_rate_z = z_score(pokemon_rate.win_rate, win_rate_mean, win_rate_std)
