@@ -12,7 +12,7 @@ namespace :hero do
     pick_rate_mean, pick_rate_std = calculate_mean_and_std(latest_hero_rates, :pick_rate)
     ban_rate_mean, ban_rate_std = calculate_mean_and_std(latest_hero_rates, :ban_rate)
 
-    # 各ヒーローのtierを計算し、更新
+    # 各ヒーローのtierを計算し、HeroTiersテーブルに保存
     latest_hero_rates.each do |hero_rate|
       hero = hero_rate.hero
 
@@ -28,8 +28,13 @@ namespace :hero do
       tier_score_z = 0.6 * win_rate_z + 0.25 * pick_rate_z + 0.15 * ban_rate_z - 0.2 * interaction
 
       # tier_score_zに基づいてティアを割り当て
-      hero.tier = assign_tier(tier_score_z)
-      hero.save!
+      tier = assign_tier(tier_score_z)
+
+      # HeroTiersテーブルにデータを保存
+      HeroTier.find_or_initialize_by(hero_id: hero.id, rates_fetched_date: latest_date).tap do |hero_tier|
+        hero_tier.tier = tier
+        hero_tier.save!
+      end
     end
 
     puts 'Hero tiers updated successfully.'
