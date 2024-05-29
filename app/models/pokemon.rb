@@ -1,5 +1,7 @@
 class Pokemon < ApplicationRecord
     has_many :pokemon_rates, dependent: :destroy
+    has_many :pokemon_tiers, dependent: :destroy
+
     VALID_STYLES = ['All-Rounder', 'Supporter', 'Attacker', 'Defender', 'Speedster'].freeze
   
     validates :name_en, presence: true, uniqueness: true
