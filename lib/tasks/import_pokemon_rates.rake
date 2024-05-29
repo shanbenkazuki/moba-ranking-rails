@@ -9,8 +9,6 @@ namespace :import do
     # 最新のCSVファイルを取得
     latest_csv_file = Dir.glob("#{csv_directory}/pokemon_stats_*.csv").max_by { |f| File.mtime(f) }
 
-    puts "Latest CSV file: #{latest_csv_file}"
-
     # CSVファイルが存在する場合にインポートを実行
     if latest_csv_file
       # ファイル名から日付を抽出
@@ -19,8 +17,6 @@ namespace :import do
 
       # 最新のPokemonRateレコードの日付を取得
       latest_pokemon_rate = PokemonRate.order(reference_date: :desc).first
-
-      puts latest_pokemon_rate.reference_date
 
       # CSVファイルの日付が最新のPokemonRateレコードの日付と一致する場合はスキップ
       if latest_pokemon_rate && latest_pokemon_rate.reference_date == reference_date
