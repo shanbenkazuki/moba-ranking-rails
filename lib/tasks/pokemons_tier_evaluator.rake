@@ -14,27 +14,32 @@ namespace :pokemon do
 
     # 各ポケモンのtierを計算し、更新
     latest_pokemon_rates.each do |pokemon_rate|
-      # win_rate, pick_rate, ban_rateがnilの場合はスキップ
-      if pokemon_rate.win_rate.nil? || pokemon_rate.pick_rate.nil? || pokemon_rate.ban_rate.nil?
-        next
-      end
-
       pokemon = pokemon_rate.pokemon
 
-      # 各指標のz-scoreを計算
-      win_rate_z = z_score(pokemon_rate.win_rate, win_rate_mean, win_rate_std)
-      pick_rate_z = z_score(pokemon_rate.pick_rate, pick_rate_mean, pick_rate_std)
-      ban_rate_z = z_score(pokemon_rate.ban_rate, ban_rate_mean, ban_rate_std)
+      if pokemon_rate.win_rate.nil? && pokemon_rate.pick_rate.nil? && pokemon_rate.ban_rate.nil?
+        # win_rate, pick_rate, ban_rateのすべてがnilの場合はtierをNULLにする
+        tier = nil
+      else
+        # 各指標のz-scoreを計算
+        win_rate_z = z_score(pokemon_rate.win_rate, win_rate_mean, win_rate_std)
+        pick_rate_z = z_score(pokemon_rate.pick_rate, pick_rate_mean, pick_rate_std)
+        ban_rate_z = z_score(pokemon_rate.ban_rate, ban_rate_mean, ban_rate_std)
 
-      # interactionの計算
-      interaction = win_rate_z * pick_rate_z
+        # interactionの計算
+        interaction = win_rate_z * pick_rate_z
 
-      # tier_score_zの計算
-      tier_score_z = 0.6 * win_rate_z + 0.25 * pick_rate_z + 0.15 * ban_rate_z - 0.2 * interaction
+        # tier_score_zの計算
+        tier_score_z = 0.6 * win_rate_z + 0.25 * pick_rate_z + 0.15 * ban_rate_z - 0.2 * interaction
 
-      # tier_score_zに基づいてティアを割り当て
-      pokemon.tier = assign_tier(tier_score_z)
-      pokemon.save!
+        # tier_score_zに基づいてティアを割り当て
+        tier = assign_tier(tier_score_z)
+      end
+
+      # PokemonTierレコードを作成または更新
+      pokemon_tier = PokemonTier.find_or_initialize_by(pokemon_id: pokemon.id)
+      pokemon_tier.tier = tier
+      pokemon_tier.rates_fetched_date = latest_date
+      pokemon_tier.save!
     end
 
     puts 'Pokemon tiers updated successfully.'
