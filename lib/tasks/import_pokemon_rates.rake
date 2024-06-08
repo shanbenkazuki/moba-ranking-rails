@@ -7,12 +7,12 @@ namespace :import do
     csv_directory = 'db/csv/pokemon_rates'
 
     # 最新のCSVファイルを取得
-    latest_csv_file = Dir.glob("#{csv_directory}/pokemon_stats_*.csv").max_by { |f| File.mtime(f) }
+    latest_csv_file = Dir.glob("#{csv_directory}/pokemon_rates_*.csv").max_by { |f| File.mtime(f) }
 
     # CSVファイルが存在する場合にインポートを実行
     if latest_csv_file
       # ファイル名から日付を抽出
-      date_string = latest_csv_file.match(/pokemon_stats_(\d{4}-\d{2}-\d{2})_\d{6}\.csv/)[1]
+      date_string = latest_csv_file.match(/pokemon_rates_(\d{4}-\d{2}-\d{2})_\d{6}\.csv/)[1]
       reference_date = Date.parse(date_string)
 
       # 最新のPokemonRateレコードの日付を取得
