@@ -1,37 +1,37 @@
-<div class="container my-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card border-0 shadow-lg mb-4">
-        <div class="card-body text-center">
-          <h1 class="card-title mb-4">モバイル・レジェンド</h1>
-          
-          <a href="/heroes" class="d-block mb-4">
-            <%= image_tag "mlbb-featured.webp", class: "img-fluid rounded", alt: "Mobile Legends" %>
-          </a>
-          
-          <p class="card-text lead mb-4">
-            モバイル・レジェンドのヒーローティアをチェックしよう！
-          </p>
-          
-          <a href="/heroes" class="btn btn-primary btn-lg px-5 py-3 text-uppercase font-weight-bold">
+<div class="container mx-auto my-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="card bg-base-100 shadow-xl">
+      <figure>
+        <a href="/heroes">
+          <%= image_tag "mlbb-featured.webp", alt: "Mobile Legends", class: "rounded-t-box" %>
+        </a>
+      </figure>
+      <div class="card-body items-center text-center">
+        <h2 class="card-title text-3xl font-bold mb-4">モバイル・レジェンド</h2>
+        <p class="mb-4">
+          モバイル・レジェンドのヒーローティアをチェックしよう！
+        </p>
+        <div class="card-actions">
+          <a href="/heroes" class="btn btn-primary btn-lg px-8 py-3 uppercase font-bold">
             Tierを見る
           </a>
         </div>
       </div>
-      
-      <div class="card border-0 shadow-lg">
-        <div class="card-body text-center">
-          <h1 class="card-title mb-4">ポケモンユナイト</h1>
-          
-          <a href="/pokemons" class="d-block mb-4">
-            <%= image_tag "unite-featured.webp", class: "img-fluid rounded", alt: "Pokemon Unite" %>
-          </a>
-          
-          <p class="card-text lead mb-4">
-            ポケモンユナイトのヒーローティアをチェックしよう！
-          </p>
-          
-          <a href="/pokemons" class="btn btn-primary btn-lg px-5 py-3 text-uppercase font-weight-bold">
+    </div>
+    
+    <div class="card bg-base-100 shadow-xl">
+      <figure>
+        <a href="/pokemons">
+          <%= image_tag "unite-featured.webp", alt: "Pokemon Unite", class: "rounded-t-box" %>
+        </a>
+      </figure>
+      <div class="card-body items-center text-center">
+        <h2 class="card-title text-3xl font-bold mb-4">ポケモンユナイト</h2>
+        <p class="mb-4">
+          ポケモンユナイトのヒーローティアをチェックしよう！
+        </p>
+        <div class="card-actions">
+          <a href="/pokemons" class="btn btn-primary btn-lg px-8 py-3 uppercase font-bold">
             Tierを見る
           </a>
         </div>
