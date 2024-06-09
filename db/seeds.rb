@@ -130,7 +130,7 @@ CSV.foreach(csv_file_path, headers: true) do |row|
   )
 end
 
-csv_file_path = 'db/csv/pokemon_rates/pokemon_rates_2024-05-28_160525'
+csv_file_path = 'db/csv/pokemon_rates/pokemon_rates_2024-05-28_160525.csv'
 reference_date = Date.parse('2024-05-28')
 
 CSV.foreach(csv_file_path, headers: true) do |row|
