@@ -1,20 +1,43 @@
-<div class="row">
-  <div class="col">
-    <h1 class="text-center mb-4">ポケモンTier</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <p class="lead text-center">更新日: <span class="badge bg-primary"><%= @latest_fetched_date %></span></p>
+<div class="relative">
+  <div class="relative z-10 py-8">
+    <h1 class="text-4xl md:text-5xl font-bold text-white text-center mb-4">
+      <span class="text-shadow">ポケモン</span>
+      <span class="text-shadow text-yellow-400">Tier</span>
+    </h1>
+    <p class="text-lg md:text-xl text-white text-center">
+      更新日: <span class="inline-block text-white px-2 py-1"><%= @latest_fetched_date %></span>
+    </p>
   </div>
 </div>
 
-<table class="table">
-  <%= render partial: 'tier', locals: { tier: 'S+', color: '#ff9900', bg_color: '#ffeecc' } %>
-  <%= render partial: 'tier', locals: { tier: 'S', color: '#ff6666', bg_color: '#ffeeee' } %>
-  <%= render partial: 'tier', locals: { tier: 'A+', color: '#ff00cc', bg_color: '#ffe7fa' } %>
-  <%= render partial: 'tier', locals: { tier: 'A', color: '#6666ff', bg_color: '#eeeeff' } %>
-  <%= render partial: 'tier', locals: { tier: 'B', color: '#53abff', bg_color: '#f0f8ff' } %>
-  <%= render partial: 'tier', locals: { tier: 'C', color: '#0dbc0d', bg_color: '#eeffee' } %>
-  <%= render partial: 'tier', locals: { tier: 'EX', color: '#666666', bg_color: '#eaeaea' } %>
-</table>
+
+<div class="flex flex-col space-y-8">
+  <% tier_colors = {
+    'S+' => 'bg-gradient-to-r from-pink-500 to-red-500',
+    'S' => 'bg-gradient-to-r from-purple-500 to-indigo-500',
+    'A+' => 'bg-gradient-to-r from-blue-500 to-green-500',
+    'A' => 'bg-gradient-to-r from-green-500 to-yellow-500',
+    'B' => 'bg-gradient-to-r from-yellow-500 to-orange-500',
+    'C' => 'bg-gradient-to-r from-gray-600 to-gray-800',
+    'EX' => 'bg-gradient-to-r from-gray-400 to-gray-600'
+  } %>
+
+  <% %w[S+ S A+ A B C EX].each do |tier| %>
+    <div class="flex items-center <%= tier_colors[tier] %> rounded-lg">
+      <div class="w-12 flex-shrink-0 flex items-center justify-center p-4">
+        <h2 class="text-white text-2xl font-bold"><%= tier %></h2>
+      </div>
+      <div class="flex-grow border-l-2 border-white pl-4 py-4">
+        <div class="flex flex-wrap -mx-2">
+          <% @pokemons.select { |pokemon| pokemon.tier == tier }.each do |pokemon| %>
+            <div class="w-20 px-2 mb-4">
+              <div class="shadow-md overflow-hidden">
+                <%= image_tag pokemon.tier_img_url, alt: pokemon.name_en, class: 'w-full h-auto' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
