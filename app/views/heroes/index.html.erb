@@ -11,6 +11,39 @@
     </div>
   </div>
 
+  <div class="mb-8">
+    <%= search_form_for @q, url: heroes_path, id: 'role_filter_form', class: 'flex flex-wrap justify-center' do |f| %>
+      <% @roles.each do |role| %>
+        <label class="flex items-center mr-6 mb-4">
+          <%= f.radio_button :role_eq, role, onchange: 'document.getElementById("role_filter_form").submit();', checked: (params[:q] && params[:q][:role_eq] == role), class: 'form-radio h-5 w-5 text-blue-500' %>
+          <span class="ml-2 text-white">
+            <% case role %>
+              <% when 'Fighter' %>
+                ファイター
+              <% when 'Tank' %>
+                タンク
+              <% when 'Assassin' %>
+                アサシン
+              <% when 'Mage' %>
+                メイジ
+              <% when 'Marksman' %>
+                ハンター
+              <% when 'Support' %>
+                サポート
+              <% else %>
+                <%= role.titleize %>
+            <% end %>
+          </span>
+        </label>
+      <% end %>
+
+      <label class="flex items-center mb-4">
+        <%= f.radio_button :role_eq, '', onchange: 'document.getElementById("role_filter_form").submit();', checked: (params[:q].blank? || params[:q][:role_eq].blank?), class: 'form-radio h-5 w-5 text-blue-500' %>
+        <span class="ml-2 text-white">すべてのロール</span>
+      </label>
+    <% end %>
+  </div>
+
   <div class="flex flex-col space-y-8">
     <% tier_colors = {
       'S+' => 'bg-gradient-to-r from-pink-500 to-red-500',
