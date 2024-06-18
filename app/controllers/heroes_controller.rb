@@ -9,5 +9,9 @@ class HeroesController < ApplicationController
                 .joins(:hero_tiers)
                 .where(hero_tiers: { rates_fetched_date: @latest_fetched_date })
                 .order('heroes.name_en')
+
+    @hero_win_rates = HeroRate.where(reference_date: @latest_fetched_date).joins(:hero).order(win_rate: :desc).pluck('heroes.name_jp', :win_rate)
+    @hero_pick_rates = HeroRate.where(reference_date: @latest_fetched_date).joins(:hero).order(pick_rate: :desc).pluck('heroes.name_jp', :pick_rate)
+    @hero_ban_rates = HeroRate.where(reference_date: @latest_fetched_date).joins(:hero).order(ban_rate: :desc).pluck('heroes.name_jp', :ban_rate)
   end
 end
