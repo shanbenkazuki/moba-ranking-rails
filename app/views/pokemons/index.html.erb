@@ -12,35 +12,35 @@
   </div>
 
   <div class="mb-8">
-  <%= search_form_for @q, url: pokemons_path, id: 'style_filter_form', class: 'flex flex-wrap justify-center' do |f| %>
-    <% @styles.each do |style| %>
-      <label class="flex items-center mr-6 mb-4">
-        <%= f.radio_button :style_eq, style, onchange: 'document.getElementById("style_filter_form").submit();', checked: (params[:q] && params[:q][:style_eq] == style), class: 'form-radio h-5 w-5' %>
-        <span class="ml-2 text-white">
-          <% case style %>
-            <% when 'Attacker' %>
-              アタッカー
-            <% when 'Defender' %>
-              ディフェンダー
-            <% when 'Speedster' %>
-              スピードスター
-            <% when 'Supporter' %>
-              サポーター
-            <% when 'All-Rounder' %>
-              オールラウンダー
-            <% else %>
-              <%= style.titleize %>
-          <% end %>
-        </span>
+    <%= search_form_for @q, url: pokemons_path, id: 'style_filter_form', class: 'flex flex-wrap justify-center' do |f| %>
+      <% @styles.each do |style| %>
+        <label class="flex items-center mr-6 mb-4">
+          <%= f.radio_button :style_eq, style, onchange: 'document.getElementById("style_filter_form").submit();', checked: (params[:q] && params[:q][:style_eq] == style), class: 'form-radio h-5 w-5' %>
+          <span class="ml-2 text-white">
+            <% case style %>
+              <% when 'Attacker' %>
+                アタッカー
+              <% when 'Defender' %>
+                ディフェンダー
+              <% when 'Speedster' %>
+                スピードスター
+              <% when 'Supporter' %>
+                サポーター
+              <% when 'All-Rounder' %>
+                オールラウンダー
+              <% else %>
+                <%= style.titleize %>
+            <% end %>
+          </span>
+        </label>
+      <% end %>
+
+      <label class="flex items-center mb-4">
+        <%= f.radio_button :style_eq, '', onchange: 'document.getElementById("style_filter_form").submit();', checked: (params[:q].blank? || params[:q][:style_eq].blank?), class: 'form-radio h-5 w-5' %>
+        <span class="ml-2 text-white">すべてのスタイル</span>
       </label>
     <% end %>
-
-    <label class="flex items-center mb-4">
-      <%= f.radio_button :style_eq, '', onchange: 'document.getElementById("style_filter_form").submit();', checked: (params[:q].blank? || params[:q][:style_eq].blank?), class: 'form-radio h-5 w-5' %>
-      <span class="ml-2 text-white">すべてのスタイル</span>
-    </label>
-  <% end %>
-</div>
+  </div>
 
 
   <div class="flex flex-col space-y-8">
