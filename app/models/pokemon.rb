@@ -8,5 +8,8 @@ class Pokemon < ApplicationRecord
     validates :name_jp, presence: true
     validates :style, presence: true, inclusion: { in: VALID_STYLES }
     validates :tier_img_url, presence: true
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["style"]
+    end
   end
-  
