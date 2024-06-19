@@ -73,4 +73,26 @@
       </div>
     <% end %>
   </div>
+  <div data-controller="tabs">
+    <div role="tablist" class="tabs tabs-bordered py-6 grid grid-cols-3">
+      <a role="tab" class="tab tab-active" data-tabs-target="tab" data-action="click->tabs#change" data-tab="win-rate">勝率</a>
+      <div class="tab-content">
+        <div id="win-rate" data-tabs-target="content">
+          <%= bar_chart @pokemon_win_rates, height: "1200px", suffix: "%", label: "勝率" %>
+        </div>
+      </div>
+      <a role="tab" class="tab" data-tabs-target="tab" data-action="click->tabs#change" data-tab="pick-rate">Pick率</a>
+      <div class="tab-content">
+        <div id="pick-rate" class="hidden" data-tabs-target="content">
+          <%= bar_chart @pokemon_pick_rates, height: "1200px", suffix: "%", label: "Pick率" %>
+        </div>
+      </div>
+      <a role="tab" class="tab" data-tabs-target="tab" data-action="click->tabs#change" data-tab="ban-rate">BAN率</a>
+      <div class="tab-content">
+        <div id="ban-rate" class="hidden" data-tabs-target="content">
+          <%= bar_chart @pokemon_ban_rates, height: "1200px", suffix: "%", label: "BAN率" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
