@@ -26,11 +26,6 @@
    bundle exec rake pokemon:calculate_tiers
    ```
 
-3. ポケモンの基本情報をインポート：
-   ```
-   bundle exec rake import:pokemons
-   ```
-
 ## fly.ioへのデータ更新
 
 ローカル環境でのデータ更新後、以下の手順でfly.ioの環境にデータを反映させます：
@@ -50,10 +45,20 @@
    ```
    bundle exec rake import:pokemon_stats
    bundle exec rake pokemon:calculate_tiers
-   bundle exec rake import:pokemons
    ```
 
 4. SSH接続を終了：
    ```
    exit
+   ```
+
+## 新規キャラクターの追加
+
+### ポケモンユナイト
+
+1. db/csv/pokemons.csvに追加
+
+2. ポケモン情報を更新
+   ```
+   bundle exec rake import:pokemons
    ```
