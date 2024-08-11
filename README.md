@@ -67,3 +67,12 @@
    ```
    bundle exec rake import:pokemons
    ```
+
+### モバイル・レジェンド
+
+1. db/csv/hero.csvに追加
+
+2. ヒーロー情報を更新
+   ```
+   bundle exec rake import:heroes
+   ```
